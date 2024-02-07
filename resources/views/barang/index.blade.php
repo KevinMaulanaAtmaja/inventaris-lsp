@@ -10,15 +10,14 @@
         </tr>
     </thead>
     <tbody>
-        <a href="{{ route('barang.index') }}" class="btn btn-primary mt-3">+ Tambah Barang</a>
-        {{-- <a href="{{ 'pembayaran' }}" class="btn btn-primary mt-3 mx-3">+ Pembayaran</a> --}}
+        <a href="{{ route('barang.create') }}" class="btn btn-primary mt-3">+ Tambah Barang</a>
         @foreach ($barang as $b)
             <tr>
                 <td>{{ $b->nama_barang }}</td>
-                <td>{{ $b->gambar }}</td>
+                <td><img src="{{ asset('images/' . $b->gambar) }}" width="120"></td>
                 <td>
                     <form action="">
-                        <a href="{{ route('barang.create', $b->id) }}" class="btn btn-warning btn-sm">Edit</a>
+                        <a href="{{ route('barang.edit', $b->id) }}" class="btn btn-warning btn-sm">Edit</a>
                         <a onclick="return confirm('apa yakin?')" href="{{ route('barang.destroy', $b->id) }}" class="btn btn-danger btn-sm">Hapus
                         </a>
                     </form>
@@ -27,5 +26,6 @@
         @endforeach
     </tbody>
 </table>
+{{ $barang->links() }}
 @endsection
 

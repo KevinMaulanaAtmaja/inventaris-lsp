@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Siswa;
 use App\Models\Barang;
 use Illuminate\Http\Request;
 
@@ -14,7 +15,7 @@ class BarangController extends Controller
      */
     public function index()
     {
-        $barang = Barang::all();
+        $barang = Barang::paginate(2);
         return view('barang.index', compact('barang'));
     }
 
@@ -25,7 +26,7 @@ class BarangController extends Controller
      */
     public function create()
     {
-        //
+        return view('barang.create');
     }
 
     /**
@@ -36,7 +37,21 @@ class BarangController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'nama_barang' => 'required|min:1',
+            'gambar' => 'required|mimes:png,jpg,jpeg|image',
+        ]);
+
+        // Simpan gambar yang diunggah
+        $imageName = time().'.'.$request->gambar->extension();
+        $request->gambar->move(public_path('images'), $imageName);
+
+        Barang::create([
+            'nama_barang' => $request->nama_barang,
+            'gambar' => $imageName,
+        ]);
+
+        return redirect('/barang')->with('success', 'Data berhasil ditambahkan!');
     }
 
     /**
@@ -58,7 +73,9 @@ class BarangController extends Controller
      */
     public function edit($id)
     {
-        //
+        $barang = Barang::findOrFail($id);
+        // dd($barang->gambar);
+        return view('barang.edit', compact('barang'));
     }
 
     /**
@@ -81,6 +98,14 @@ class BarangController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $barang = Barang::find($id);
+        // dd($barang);
+
+        if ($barang) {
+            unlink(public_path('images/' . $barang->gambar));
+            $barang->delete();
+            return redirect('/barang')->with('success','Data berhasil dihapus!');
+        }
+
     }
 }

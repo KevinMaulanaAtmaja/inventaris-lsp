@@ -28,5 +28,6 @@
             @endforeach
         </tbody>
     </table>
+    {{ $siswa->links() }}
 
 @endsection

@@ -10,7 +10,7 @@
             <a class="nav-link" href="/siswa">Siswa</a>
           </li>
           <li class="nav-item">
-            {{-- <a class="nav-link" href="{{ route('pembayaran.index') }}">Pembayaran</a> --}}
+            <a class="nav-link" href="{{ route('barang.index') }}">Barang</a>
           </li>
           <li class="nav-item">
             <a class="nav-link" href="{{ route('logout') }}">Logout</a>

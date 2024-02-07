@@ -9,7 +9,7 @@
   <body>
 
       @include('komponen.navbar')
-    <div class="container mt-5">
+    <div class="container mt-3">
         @include('komponen.alert')
         @yield('konten')
     </div>
