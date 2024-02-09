@@ -1,7 +1,7 @@
 @extends('layout.main')
 @section('konten')
-    <div class="col-sm-10 col-10 col-md-6 col-xl-6 mx-auto mt-5">
-        <div class="card mt-5 d-flex">
+<div class="col-sm-10 col-10 col-md-6 col-xl-6 mx-auto mt-5">
+    <div class="card mt-5 d-flex">
         <form action="/siswa/store" method="POST">
             @csrf
             <div class="my-3 mx-5">
@@ -22,7 +22,7 @@
             </div>
         </form>
     </div>
-    </div>
+</div>
 
 
 @endsection

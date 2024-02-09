@@ -9,7 +9,7 @@ class SiswaController extends Controller
 {
     public function index()
     {
-        $siswa = Siswa::paginate(5);
+        $siswa = Siswa::latest()->paginate(5);
         // dd($siswa);
         return view('siswa.index', compact('siswa'));
     }
@@ -32,7 +32,7 @@ class SiswaController extends Controller
             'kelas' => $request->kelas,
         ]);
 
-        return redirect('/siswa')->with('success', 'Berhasil menambah data');
+        return redirect('/siswa')->with('success', 'Data berhasil ditambahkan');
     }
 
     public function edit($id)
@@ -49,20 +49,21 @@ class SiswaController extends Controller
             'kelas' => 'required'
         ]);
 
-        $siswa = Siswa::findOrFail($id);
+        $siswa = Siswa::find($id);
 
         $siswa->update([
             'nama' => $request->nama,
             'kelas' => $request->kelas
         ]);
 
-        return redirect('/siswa')->with('success', 'Berhasil update data Siswa!');
+        return redirect('/siswa')->with('success', 'Data berhasil diubah!');
     }
 
-    public function delete($id){
+    public function delete($id)
+    {
         $siswa = Siswa::find($id);
         $siswa->delete();
         // dd($siswa);
-        return redirect('siswa')->with('success', 'Berhasil hapus data!');
+        return redirect('/siswa')->with('success', 'Data berhasil dihapus!');
     }
 }

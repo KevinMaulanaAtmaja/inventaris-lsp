@@ -2,9 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Siswa;
 use App\Models\Barang;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class BarangController extends Controller
 {
@@ -15,7 +15,7 @@ class BarangController extends Controller
      */
     public function index()
     {
-        $barang = Barang::paginate(2);
+        $barang = Barang::latest()->paginate(2);
         return view('barang.index', compact('barang'));
     }
 
@@ -44,7 +44,8 @@ class BarangController extends Controller
 
         // Simpan gambar yang diunggah
         $imageName = time().'.'.$request->gambar->extension();
-        $request->gambar->move(public_path('images'), $imageName);
+        // $request->gambar->move(public_path('images'), $imageName);
+        $request->gambar->storeAs('public/images', $imageName);
 
         Barang::create([
             'nama_barang' => $request->nama_barang,
@@ -73,7 +74,7 @@ class BarangController extends Controller
      */
     public function edit($id)
     {
-        $barang = Barang::findOrFail($id);
+        $barang = Barang::find($id);
         // dd($barang->gambar);
         return view('barang.edit', compact('barang'));
     }
@@ -87,7 +88,33 @@ class BarangController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $request->validate([
+            'nama_barang' => 'required|min:1',
+            'gambar' => 'nullable|mimes:png,jpg,jpeg|image',
+        ]);
+
+        $barang = Barang::find($id);
+        if ($request->hasFile('gambar')) {
+            $imageName = time() . '.' . $request->gambar->extension();
+            // $request->gambar->move(public_path('images'), $imageName);
+            $request->gambar->storeAs('public/images', $imageName);
+
+            // Hapus gambar lama jika ada
+            if ($barang->gambar) {
+                Storage::delete('public/images/' . $barang->gambar);
+            }
+
+            $barang->update([
+                'nama_barang' => $request->nama_barang,
+                'gambar' => $imageName,
+            ]);
+        } else {
+            $barang->update([
+                'nama_barang' => $request->nama_barang,
+            ]);
+        }
+
+        return redirect('/barang')->with('success','Data berhasil diubah!');
     }
 
     /**
@@ -102,10 +129,9 @@ class BarangController extends Controller
         // dd($barang);
 
         if ($barang) {
-            unlink(public_path('images/' . $barang->gambar));
+            Storage::delete('public/images/' . $barang->gambar);
             $barang->delete();
             return redirect('/barang')->with('success','Data berhasil dihapus!');
         }
-
     }
 }
