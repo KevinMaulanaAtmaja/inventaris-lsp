@@ -29,8 +29,8 @@ class PeminjamanController extends Controller
     public function create()
     {
         // $peminjaman = Peminjaman::with(['siswa', 'barang']);
-        $siswa = Siswa::all();
-        $barang = Barang::all();
+        $siswa = Siswa::latest()->get();;
+        $barang = Barang::latest()->get();        
         return view('peminjaman.create', compact(['siswa', 'barang']));
     }
 
@@ -79,8 +79,8 @@ class PeminjamanController extends Controller
     public function edit($id)
     {
         $peminjaman = Peminjaman::find($id);
-        $siswa = Siswa::all();
-        $barang = Barang::all();
+        $siswa = Siswa::latest()->get();
+        $barang = Barang::latest()->get();
         return view('peminjaman.edit', compact(['peminjaman', 'siswa', 'barang']));
     }
 

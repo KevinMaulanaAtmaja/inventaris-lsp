@@ -127,8 +127,15 @@ class BarangController extends Controller
     public function destroy($id)
     {
         $barang = Barang::find($id);
-        
         if ($barang) {
+            // Periksa apakah barang masih dipakai dalam peminjaman
+            $p = Peminjaman::where('id_barang', $barang->id)->exists();
+            // dd($p);
+            if ($p) {
+                return redirect('/barang')->with('error', 'Data barang masih dipakai dan tidak dapat dihapus!');
+            }
+
+            // Jika tidak dipakai, hapus gambar dan hapus barang
             Storage::delete('public/images/' . $barang->gambar);
             $barang->delete();
             return redirect('/barang')->with('success', 'Data berhasil dihapus!');
