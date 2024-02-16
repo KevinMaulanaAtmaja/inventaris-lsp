@@ -6,11 +6,11 @@
             @csrf
             <div class="my-3 mx-5">
                 <label for="nama_barang" class="form-label">Nama Barang</label>
-                <input type="text" name="nama_barang" class="form-control" value="{{ old('nama_barang') }}">
+                <input type="text" id="nama_barang" class="form-control" name="nama_barang" value="{{ old('nama_barang') }}">
             </div>
             <div class="my-3 mx-5">
                 <label for="gambar" class="form-label">Gambar</label>
-                <input type="file" name="gambar" class="form-control">
+                <input type="file" id="gambar" name="gambar" class="form-control">
             </div>
 
             <div class="mb-3 mx-5">

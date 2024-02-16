@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Barang;
+use App\Models\Peminjaman;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 
@@ -126,12 +127,11 @@ class BarangController extends Controller
     public function destroy($id)
     {
         $barang = Barang::find($id);
-        // dd($barang);
-
+        
         if ($barang) {
             Storage::delete('public/images/' . $barang->gambar);
             $barang->delete();
-            return redirect('/barang')->with('success','Data berhasil dihapus!');
+            return redirect('/barang')->with('success', 'Data berhasil dihapus!');
         }
     }
 }

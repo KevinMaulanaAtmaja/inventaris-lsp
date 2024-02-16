@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\BarangController;
+use App\Http\Controllers\PeminjamanController;
 use App\Http\Controllers\SiswaController;
 use Illuminate\Support\Facades\Route;
 
@@ -39,6 +40,9 @@ Route::middleware('checkLogin')->group(function(){
 
     // BarangController
     Route::resource('/barang', BarangController::class);
+
+    // PeminjamanController
+    Route::resource('/peminjaman', PeminjamanController::class);
 });
 
 

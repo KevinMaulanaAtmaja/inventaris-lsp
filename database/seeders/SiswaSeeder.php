@@ -16,7 +16,7 @@ class SiswaSeeder extends Seeder
     {
         $faker = \Faker\Factory::create('id_ID');
 
-        for($i = 0; $i < 5; $i++){
+        for($i = 0; $i < 6; $i++){
             Siswa::create([
                 'nama' => $faker->name,
                 'kelas' => $faker->randomElement(['X-RPL', 'XI-RPL', 'XII-PPLG'])

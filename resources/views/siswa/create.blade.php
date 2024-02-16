@@ -6,11 +6,11 @@
             @csrf
             <div class="my-3 mx-5">
                 <label for="nama" class="form-label">Nama</label>
-                <input type="text" class="form-control" name="nama" id="nama">
+                <input type="text" class="form-control" name="nama" id="nama" value="{{ old( 'nama') }}">
             </div>
             <div class="my-3 mx-5 ">
                 <label for="kelas" class="form-label">Kelas</label>
-                <select name="kelas" id="kelas" class="form-select ">
+                <select name="kelas" id="kelas" class="form-select">
                     <option value="">Pilih Kelas</option>
                     <option value="X-RPL">X-RPL</option>
                     <option value="XI-RPL">XI-RPL</option>

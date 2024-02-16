@@ -12,4 +12,8 @@ class Barang extends Model
     protected $table = 'barangs';
     protected $fillable = ['id', 'nama_barang', 'gambar'];
     protected $hidden = ['id'];
+
+    public function peminjaman(){
+        return $this->belongsTo(Peminjaman::class, 'id');
+    }
 }

@@ -6,7 +6,7 @@
             @csrf
             <div class="my-3 mx-5">
                 <label for="nama" class="form-label">Nama</label>
-                <input type="text" class="form-control" name="nama" id="nama" value="{{ $siswa->nama }}">
+                <input type="text" class="form-control" name="nama" id="nama" value="{{ old('nama', $siswa->nama) }}">
             </div>
             <div class="my-3 mx-5">
                 <label for="kelas" class="form-label">Kelas</label>

@@ -1,6 +1,6 @@
 <nav class="navbar navbar-expand-lg bg-info bg-opacity-50 ">
     <div class="container">
-        <a class="navbar-brand" href="/siswa">KasKelas</a>
+        <a class="navbar-brand" href="/siswa">Inventaris</a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
             aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
@@ -12,6 +12,9 @@
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="{{ route('barang.index') }}">Barang</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ route('peminjaman.index') }}">Peminjaman</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="{{ route('logout') }}">Logout</a>

@@ -7,14 +7,14 @@
             @method('PUT')
             <div class="my-3 mx-5">
                 <label for="nama_barang" class="form-label">Nama Barang</label>
-                <input type="text" name="nama_barang" class="form-control"
+                <input type="text" id="nama_barang" class="form-control" name="nama_barang"
                     value="{{ old('nama_barang', $barang->nama_barang) }}">
             </div>
             <div class="my-3 mx-5">
                 <img src="{{ asset('storage/images/' . $barang->gambar) }}" width="120"
                     class="img-thumbnail img-fluid d-block ">
                 <label for="gambar" class="form-label">Gambar</label>
-                <input type="file" name="gambar" class="form-control" value="{{ $barang->gambar }}">
+                <input type="file" id="gambar" name="gambar" class="form-control" value="{{ $barang->gambar }}">
             </div>
 
             <div class="mb-3 mx-5">
