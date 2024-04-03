@@ -1,5 +1,3 @@
-<!-- resources/views/siswa/index.blade.php -->
-
 @extends('layout.main')
 @section('konten')
 <h1 class="text-primary">Semua Siswa</h1>

@@ -15,6 +15,7 @@
 
             <div class="mb-3 mx-5">
                 <button class="btn btn-success">Tambah Data</button>
+                <a href="/barang" class="btn btn-primary"><< Kembali</a>
             </div>
         </form>
     </div>

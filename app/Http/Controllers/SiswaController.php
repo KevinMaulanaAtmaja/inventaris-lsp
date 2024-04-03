@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Siswa;
+use App\Models\Peminjaman;
 use Illuminate\Http\Request;
 
 class SiswaController extends Controller
@@ -62,8 +63,16 @@ class SiswaController extends Controller
     public function delete($id)
     {
         $siswa = Siswa::find($id);
-        $siswa->delete();
-        // dd($siswa);
-        return redirect('/siswa')->with('success', 'Data berhasil dihapus!');
+        if ($siswa) {
+            // Periksa apakah siswa masih dipakai dalam peminjaman
+            $p = Peminjaman::where('id_siswa', $siswa->id)->exists();
+            // dd($p);
+            if ($p) {
+                return redirect('/siswa')->with('error', 'Data siswa masih dipakai dan tidak dapat dihapus!');
+            }
+
+            $siswa->delete();
+            return redirect('/siswa')->with('success', 'Data berhasil dihapus!');
+        }
     }
 }

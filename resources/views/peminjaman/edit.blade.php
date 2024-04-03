@@ -34,6 +34,7 @@
 
             <div class="mb-3 mx-5">
                 <button class="btn btn-success">Ubah Data</button>
+                <a href="/peminjaman" class="btn btn-primary"><< Kembali</a>
             </div>
         </form>
     </div>
